@@ -9,21 +9,32 @@ As a data scientist at **Birhan Energies**, a consultancy specializing in energy
 - **Primary dataset:** Daily Brent crude oil prices (Date, Price in USD per barrel).
 - **Event dataset:** 15 key events compiled, including geopolitical conflicts, economic shocks, OPEC policy changes, and supply disruptions.
 
-| Date       | Event                                | Category               |
-|------------|--------------------------------------|------------------------|
-| 1990-08-02 | Iraq invades Kuwait (Gulf War)       | Geopolitical Conflict  |
-| 2008-09-15 | Global Financial Crisis intensifies  | Economic Shock         |
-| 2020-03-09 | COVID-19 oil price crash             | Economic Shock         |
-| 2022-02-24 | Russia invades Ukraine               | Geopolitical Conflict  |
-*Full event dataset is in `data/key_events.csv`*
+| Date       | Event                                                  | Category               |
+|------------|--------------------------------------------------------|------------------------|
+| 1990-08-02 | Iraq invades Kuwait (Gulf War)                          | Geopolitical Conflict  |
+| 1997-07-02 | Asian Financial Crisis                                 | Economic Shock         |
+| 2001-09-11 | September 11 attacks                                   | Geopolitical Shock     |
+| 2003-03-20 | US-led invasion of Iraq                                 | Geopolitical Conflict  |
+| 2008-09-15 | Global Financial Crisis intensifies                    | Economic Shock         |
+| 2010-04-20 | Deepwater Horizon oil spill                            | Supply Shock           |
+| 2011-02-15 | Arab Spring unrest                                     | Geopolitical Conflict  |
+| 2014-11-27 | OPEC decision not to cut production                    | OPEC Policy            |
+| 2016-01-16 | Iran sanctions lifted                                  | Sanctions / Policy     |
+| 2018-05-08 | US withdraws from Iran nuclear deal                    | Sanctions              |
+| 2019-09-14 | Saudi Aramco refinery attack                           | Supply Shock           |
+| 2020-03-09 | COVID-19 oil price crash                               | Economic Shock         |
+| 2020-04-12 | OPEC+ historic production cuts                         | OPEC Policy            |
+| 2021-11-26 | Omicron variant emerges                                | Economic Shock         |
+| 2022-02-24 | Russia invades Ukraine                                 | Geopolitical Conflict  |
+
 
 ## 3. Initial Exploratory Data Analysis (EDA)
-**Price Trends:** Long-term growth with sharp spikes during crises (e.g., 2008 financial crisis, 2020 pandemic).  
-
+**Price Trends:** Long-term growth with sharp spikes during crises (e.g., 2008 financial crisis, 2020 pandemic). 
+![alt text](BrentOilPricesOverTime.png) 
 **Stationarity:** Raw prices are non-stationary; log returns improve stationarity and are suitable for modeling.  
-
+![alt text](LogReturnsofBrentOilPrices.png)
 **Volatility Patterns:** Observed clustering during crises motivates probabilistic modeling.  
-
+![alt text](30-DayRolllingVolatility.png)
 *Visualizations are included in the EDA notebook.*
 
 ## 4. Data Analysis Workflow
@@ -50,17 +61,27 @@ As a data scientist at **Birhan Energies**, a consultancy specializing in energy
 
 ## 5. Assumptions & Limitations
 **Assumptions:**  
-- Events have near-immediate market effects.
-- Structural breaks reflect meaningful shifts.  
-- Daily prices adequately capture major market dynamics.  
+- Major geopolitical and economic events have a near-immediate or short-lag impact on oil prices.
+- Structural breaks in the price or return series reflect meaningful shifts in market regimes.
+- Daily Brent price data sufficiently captures market reactions to major global events.
 
 **Limitations:**  
-- Change points indicate correlation, not causation.
-- Overlapping events complicate interpretation.  
-- Lagged effects may not be captured.  
-- Macroeconomic indicators are excluded at this stage.
+- Change point detection identifies **statistical correlations in time**, not causal relationships.
+- Multiple overlapping events may contribute to a detected structural break.
+- Market reactions may be anticipatory or lagged, complicating direct event attribution.
+- Macroeconomic variables (e.g., GDP growth, inflation, exchange rates) are excluded at this stage.
+
 
 ## 6. Understanding the Model
 **Time Series Properties:** Trend, stationarity, and volatility patterns inform modeling choices.
 **Change Point Models:** Identify shifts in statistical properties; outputs include posterior distributions for break dates and pre/post regime parameters.  
 **Bayesian Approach:** Provides probabilistic estimates, quantifies uncertainty, and allows formal hypothesis testing.  
+
+## 7. Communication Plan for Stakeholders
+
+Results from this analysis will be communicated through multiple channels tailored to stakeholder needs:
+- **Investors:** Executive summaries and dashboards highlighting regime shifts, volatility changes, and risk implications.
+- **Policymakers:** Briefing documents linking price instability to geopolitical and economic events.
+- **Energy Companies:** Interactive dashboards enabling exploration of historical shocks and operational planning scenarios.
+
+Together, these channels ensure insights are accessible, interpretable, and actionable.
