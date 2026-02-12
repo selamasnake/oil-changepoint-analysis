@@ -4,3 +4,5 @@ numpy
 statsmodels
 pymc
 arviz
+flask
+flask-cors
